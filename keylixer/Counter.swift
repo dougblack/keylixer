@@ -8,6 +8,20 @@
 
 import Foundation
 
+extension Dictionary {
+    subscript(key: Key, or def: Value) -> Value {
+        mutating get {
+            return self[key] ?? {
+                self[key] = def
+                return def
+            }()
+        }
+        set {
+            self[key] = newValue
+        }
+    }
+}
+
 class Counter : NSObject {
     /**
         A Counter stores counts. It stores two types of counts.
@@ -15,9 +29,11 @@ class Counter : NSObject {
         - The total counts broken down by each key code.
     */
 
-    var counts = [NSDate: Int]();
+    var dates = [NSDate]();
+    var counts = [Int]();
     var keys = [UInt16: Int]();
     var updateDisplayCount : (NSString) -> ();
+
     
     /**
         This init() function just asks for a function handle it
@@ -34,25 +50,22 @@ class Counter : NSObject {
     func count(key: UInt16) {
         
         // Update key stats.
-        if let keyCount = self.keys[key] {
-            self.keys[key] = keyCount + 1
-        } else {
-            self.keys[key] = 1
-        }
+        self.keys[key] = self.keys[key, or: 0] + 1
         
         // Update time total.
         let timestamp = NSDate().timeIntervalSince1970
         let lastHour = timestamp - fmod(timestamp, 3600)
         let date = NSDate(timeIntervalSince1970: lastHour)
-        
-        if let hourCount = self.counts[date] {
-            self.counts[date] = hourCount + 1
+
+        if self.dates.last == date {
+            self.counts[self.counts.endIndex-1] = self.counts.last! + 1
         } else {
-            self.counts[date] = 1
+            self.dates.append(date)
+            self.counts.append(1)
         }
         
         // Update display.
-        if let newHourCount = self.counts[date] {
+        if let newHourCount = self.counts.last {
             self.updateDisplayCount("\(newHourCount)")
         }
     }

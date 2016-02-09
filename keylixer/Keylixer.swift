@@ -29,6 +29,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
         self.attachKeyListener()
     }
 
+
     /**
         Keylixer is trying to quit. Save the data!
     */

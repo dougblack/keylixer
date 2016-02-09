@@ -63,7 +63,8 @@ class Keylixer: NSObject, NSApplicationDelegate {
     */
     func buildMenu() -> NSMenu {
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Status", action: Selector("openStatus:"), keyEquivalent: "S"))
+        menu.addItem(NSMenuItem(title: "Stats", action: Selector("openStats:"), keyEquivalent: "S"))
+        menu.addItem(NSMenuItem(title: "Preferences", action: Selector("openPreferences:"), keyEquivalent: "P"))
         return menu
     }
     

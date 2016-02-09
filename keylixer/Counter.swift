@@ -17,7 +17,6 @@ class Counter : NSObject {
 
     var counts = [NSDate: Int]();
     var keys = [UInt16: Int]();
-    var lastHour = NSDate();
     var updateDisplayCount : (NSString) -> ();
     
     /**
@@ -52,6 +51,7 @@ class Counter : NSObject {
             self.counts[date] = 1
         }
         
+        // Update display.
         if let newHourCount = self.counts[date] {
             self.updateDisplayCount("\(newHourCount)")
         }

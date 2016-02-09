@@ -9,15 +9,29 @@
 import Foundation
 
 class Counter : NSObject {
+    /**
+        A Counter stores counts. It stores two types of counts.
+        - The total keystrokes per hour in a dictionary with one key/value pair per hour.
+        - The total counts broken down by each key code.
+    */
+
     var counts = [NSDate: Int]();
     var keys = [UInt16: Int]();
     var lastHour = NSDate();
     var updateDisplayCount : (NSString) -> ();
     
+    /**
+        This init() function just asks for a function handle it
+        can shoot count updated events at.
+    */
     init(updateDisplayCount: (NSString) -> ()) {
         self.updateDisplayCount = updateDisplayCount
     }
     
+    /**
+        Do the actual counting. Here we ask for a key code and manipulate that
+        into our two datastructures.
+    */
     func count(key: UInt16) {
         
         // Update key stats.

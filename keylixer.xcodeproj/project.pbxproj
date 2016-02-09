@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3BD9732D1C69AFBF008E1BFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9732C1C69AFBF008E1BFD /* AppDelegate.swift */; };
-		3BD9732F1C69AFBF008E1BFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9732E1C69AFBF008E1BFD /* ViewController.swift */; };
+		3BD9732D1C69AFBF008E1BFD /* Keylixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9732C1C69AFBF008E1BFD /* Keylixer.swift */; };
 		3BD973311C69AFBF008E1BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BD973301C69AFBF008E1BFD /* Assets.xcassets */; };
 		3BD973341C69AFBF008E1BFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BD973321C69AFBF008E1BFD /* Main.storyboard */; };
+		3BD9733C1C69BB58008E1BFD /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9733B1C69BB58008E1BFD /* Counter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3BD973291C69AFBF008E1BFD /* keylixer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keylixer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BD9732C1C69AFBF008E1BFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3BD9732E1C69AFBF008E1BFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3BD9732C1C69AFBF008E1BFD /* Keylixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keylixer.swift; sourceTree = "<group>"; };
 		3BD973301C69AFBF008E1BFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BD973331C69AFBF008E1BFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3BD973351C69AFBF008E1BFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3BD9733B1C69BB58008E1BFD /* Counter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +52,8 @@
 		3BD9732B1C69AFBF008E1BFD /* keylixer */ = {
 			isa = PBXGroup;
 			children = (
-				3BD9732C1C69AFBF008E1BFD /* AppDelegate.swift */,
-				3BD9732E1C69AFBF008E1BFD /* ViewController.swift */,
+				3BD9732C1C69AFBF008E1BFD /* Keylixer.swift */,
+				3BD9733B1C69BB58008E1BFD /* Counter.swift */,
 				3BD973301C69AFBF008E1BFD /* Assets.xcassets */,
 				3BD973321C69AFBF008E1BFD /* Main.storyboard */,
 				3BD973351C69AFBF008E1BFD /* Info.plist */,
@@ -131,8 +131,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BD9732F1C69AFBF008E1BFD /* ViewController.swift in Sources */,
-				3BD9732D1C69AFBF008E1BFD /* AppDelegate.swift in Sources */,
+				3BD9733C1C69BB58008E1BFD /* Counter.swift in Sources */,
+				3BD9732D1C69AFBF008E1BFD /* Keylixer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

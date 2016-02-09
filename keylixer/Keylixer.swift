@@ -9,13 +9,13 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class Keylixer: NSObject, NSApplicationDelegate {
 
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
-    var counter = [UInt16: Int]()
-    var total = 0;
+    var counter : Counter?;
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        self.counter = Counter(updateDisplayCount: self.updateDisplayCount)
         self.statusItem.menu = self.buildMenu()
         self.statusItem.title = "--- keys"
         self.acquirePrivileges()
@@ -27,34 +27,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func acquirePrivileges() -> Bool {
-        let accessEnabled = AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true
-        ])
+        let accessEnabled = AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true])
         if accessEnabled == false {
-            print("You need to enable keylixer in System Preferences")
+            print("Accessibility access refused.")
+            exit(1)
         }
         return accessEnabled
     }
     
     func attachKeyListener() {
-        NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask, handler: {(event: NSEvent) in self.count(event)
+        NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask, handler: {
+            (event: NSEvent) in self.counter?.count(event.keyCode)
         })
-    }
-    
-    func count(event: NSEvent) {
-        if let keyCount = self.counter[event.keyCode] {
-            self.counter[event.keyCode] = keyCount + 1
-        } else {
-            self.counter[event.keyCode] = 1
-        }
-        self.total += 1
-        self.statusItem.title = "\(total) keys"
-        print("\(total) keys")
     }
     
     func buildMenu() -> NSMenu {
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Status", action: Selector("openStatus:"), keyEquivalent: "S"))
         return menu
+    }
+    
+    func updateDisplayCount(count : NSString) {
+        self.statusItem.title = "\(count) keys"
     }
 
 }

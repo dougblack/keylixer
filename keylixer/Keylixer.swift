@@ -16,6 +16,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
     var counter : Counter?
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+    var displayCount: Int?
 
     /**
         Keylixer is just loading. Ensure we have permission to listen to key
@@ -28,7 +29,6 @@ class Keylixer: NSObject, NSApplicationDelegate {
         self.acquirePrivileges()
         self.attachKeyListener()
     }
-
 
     /**
         Keylixer is trying to quit. Save the data!
@@ -72,8 +72,8 @@ class Keylixer: NSObject, NSApplicationDelegate {
     /**
         This is the function that actually updates the active key count on the status item.
     */
-    func updateDisplayCount(count : NSString) {
-        self.statusItem.title = "\(count) keys"
+    func updateDisplayCount(count : Int) {
+        self.displayCount = count
     }
 
 }

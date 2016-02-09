@@ -29,17 +29,16 @@ class Counter : NSObject {
         - The total counts broken down by each key code.
     */
 
-    var dates = [NSDate]();
+    var dates = [NSTimeInterval]();
     var counts = [Int]();
     var keys = [UInt16: Int]();
-    var updateDisplayCount : (NSString) -> ();
-
+    var updateDisplayCount : (Int) -> ();
     
     /**
         This init() function just asks for a function handle it
         can shoot count updated events at.
     */
-    init(updateDisplayCount: (NSString) -> ()) {
+    init(updateDisplayCount: (Int) -> ()) {
         self.updateDisplayCount = updateDisplayCount
     }
     
@@ -55,18 +54,18 @@ class Counter : NSObject {
         // Update time total.
         let timestamp = NSDate().timeIntervalSince1970
         let lastHour = timestamp - fmod(timestamp, 3600)
-        let date = NSDate(timeIntervalSince1970: lastHour)
 
-        if self.dates.last == date {
+        if self.dates.last == lastHour {
             self.counts[self.counts.endIndex-1] = self.counts.last! + 1
         } else {
-            self.dates.append(date)
+            self.dates.append(lastHour)
             self.counts.append(1)
         }
         
         // Update display.
         if let newHourCount = self.counts.last {
-            self.updateDisplayCount("\(newHourCount)")
+            self.updateDisplayCount(newHourCount)
+            print("\(newHourCount) keys")
         }
     }
 }

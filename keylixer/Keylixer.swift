@@ -75,6 +75,5 @@ class Keylixer: NSObject, NSApplicationDelegate {
     func updateDisplayCount(count : Int) {
         self.displayCount = count
     }
-
 }
 

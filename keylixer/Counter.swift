@@ -8,20 +8,6 @@
 
 import Foundation
 
-extension Dictionary {
-    subscript(key: Key, or def: Value) -> Value {
-        mutating get {
-            return self[key] ?? {
-                self[key] = def
-                return def
-            }()
-        }
-        set {
-            self[key] = newValue
-        }
-    }
-}
-
 class Counter : NSObject {
     /**
         A Counter stores counts. It stores two types of counts.
@@ -65,7 +51,6 @@ class Counter : NSObject {
         // Update display.
         if let newHourCount = self.counts.last {
             self.updateDisplayCount(newHourCount)
-            print("\(newHourCount) keys")
         }
     }
 }

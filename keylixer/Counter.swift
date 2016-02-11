@@ -45,15 +45,13 @@ class Counter : NSObject {
             hours.append(now)
         }
 
-        let last = hours.last!
-        
-        if last != now {
+        if hours.last! != now {
             hours += now.hoursSince(hours.last!)
             hours.append(now)
         }
         
-        last.inc()
-        updateDisplayCount(last.count)
+        hours.last!.inc()
+        updateDisplayCount(hours.last!.count)
     }
 
     func archive() {

@@ -21,10 +21,12 @@ class Counter : NSObject {
     
     /**
         This init() function just asks for a function handle it
-        can shoot count updated events at.
+        can shoot count updated events at. It tries loading the hours
+        in the background.
     */
     init(updateDisplayCount: (Int) -> ()) {
         self.updateDisplayCount = updateDisplayCount
+
         if let hours = Archiver.unarchiveHours() {
             self.hours = hours
         } else {
@@ -41,19 +43,18 @@ class Counter : NSObject {
         let now = Hour()
         
         if hours.last == nil {
-            hours.append(Hour())
+            hours.append(now)
         }
+
+        let last = hours.last!
         
-        if hours.last! != now {
+        if last != now {
             hours += now.hoursSince(hours.last!)
             hours.append(now)
         }
         
-        hours.last!.inc()
-        
-        if let hour = hours.last {
-            updateDisplayCount(hour.count)
-        }
+        last.inc()
+        updateDisplayCount(last.count)
     }
 
     func archive() {

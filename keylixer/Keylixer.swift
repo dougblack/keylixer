@@ -27,6 +27,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
         self.statusItem.menu = self.buildMenu()
         self.statusItem.button!.title = "Keys"
+
         self.acquirePrivileges()
         self.attachKeyListener()
     }

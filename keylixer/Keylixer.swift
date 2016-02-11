@@ -24,7 +24,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
     */
     func applicationDidFinishLaunching(aNotification: NSNotification) {
 
-        self.counter = Counter(updateDisplayCount: self.updateDisplayCount)
+        self.counter = Counter()
 
         self.statusItem.menu = self.buildMenu()
         self.statusItem.button!.title = "Keys"
@@ -60,16 +60,9 @@ class Keylixer: NSObject, NSApplicationDelegate {
     */
     func buildMenu() -> NSMenu {
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Stats", action: Selector("stats:"), keyEquivalent: "S"))
-        menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit:"), keyEquivalent: "Q"))
+        menu.addItem(NSMenuItem(title: "Stats", action: Selector("stats:"), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit:"), keyEquivalent: ""))
         return menu
-    }
-    /**
-        This is the function that actually updates the active key count on the status item.
-    */
-    func updateDisplayCount(count : Int) {
-        self.statusItem.button!.title = "\(count) keys"
-        print(count)
     }
 
     func quit(sender: NSMenuItem) {

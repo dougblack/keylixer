@@ -17,16 +17,14 @@ class Counter : NSObject {
 
 
     var hours : [Hour]
-    var updateDisplayCount : (Int) -> ()
     
     /**
         This init() function just asks for a function handle it
         can shoot count updated events at. It tries loading the hours
         in the background.
     */
-    init(updateDisplayCount: (Int) -> ()) {
-        self.updateDisplayCount = updateDisplayCount
 
+    override init() {
         if let hours = Archiver.unarchiveHours() {
             self.hours = hours
         } else {
@@ -50,7 +48,7 @@ class Counter : NSObject {
         }
         
         hours.last!.inc()
-        updateDisplayCount(hours.last!.count)
+
     }
 
     func archive() {

@@ -55,11 +55,10 @@ class Keylixer: NSObject, NSApplicationDelegate {
     */
     func buildMenu() -> NSMenu {
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Stats", action: Selector("openStats:"), keyEquivalent: "S"))
+        menu.addItem(NSMenuItem(title: "Stats", action: Selector("stats:"), keyEquivalent: "S"))
         menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit:"), keyEquivalent: "Q"))
         return menu
     }
-
     /**
         This is the function that actually updates the active key count on the status item.
     */
@@ -70,6 +69,12 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
     func quit(sender: NSMenuItem) {
         NSApplication.sharedApplication().terminate(self)
+    }
+
+    func stats(sender: NSMenuItem) {
+        let statistician = Statistician(counter: self.counter!)
+        let stats = statistician.stats()
+        print(stats)
     }
 
     /**

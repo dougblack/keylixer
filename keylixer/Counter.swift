@@ -33,7 +33,6 @@ class Counter : NSObject {
             self.hours = [Hour]()
         }
     }
-    
     /**
         Do the actual counting.
     */

@@ -42,7 +42,7 @@ class Counter : NSObject {
 
         let now = Hour()
         
-        if hours.last == nil {
+        if hours.isEmpty {
             hours.append(now)
         }
 

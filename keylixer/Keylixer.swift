@@ -79,6 +79,12 @@ class Keylixer: NSObject, NSApplicationDelegate {
     func stats(sender: NSMenuItem) {
         if let button = statusItem.button {
             statsPopover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: NSRectEdge.MinY)
+            NSEvent.addGlobalMonitorForEventsMatchingMask([NSEventMask.LeftMouseDownMask, NSEventMask.RightMouseDownMask], handler: {
+                (event: NSEvent) in
+                if self.statsPopover.shown {
+                    self.statsPopover.performClose(event)
+                }
+            })
         }
     }
 

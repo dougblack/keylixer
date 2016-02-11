@@ -15,8 +15,6 @@ class Counter : NSObject {
         - The total counts broken down by each key code.
     */
 
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("keylixer")
 
     var hours : [Hour]
     var updateDisplayCount : (Int) -> ()
@@ -27,7 +25,11 @@ class Counter : NSObject {
     */
     init(updateDisplayCount: (Int) -> ()) {
         self.updateDisplayCount = updateDisplayCount
-        self.hours = Counter.loadHours()
+        if let hours = Archiver.unarchiveHours() {
+            self.hours = hours
+        } else {
+            self.hours = [Hour]()
+        }
     }
     
     /**
@@ -55,16 +57,6 @@ class Counter : NSObject {
     }
 
     func archive() {
-        NSKeyedArchiver.archiveRootObject(self.hours, toFile: Counter.ArchiveURL.path!)
+        Archiver.archiveHours(self.hours)
     }
-
-    class func loadHours() -> [Hour] {
-        let fileManager = NSFileManager.defaultManager()
-        if fileManager.fileExistsAtPath(Counter.ArchiveURL.path!) {
-            return NSKeyedUnarchiver.unarchiveObjectWithFile(Counter.ArchiveURL.path!) as! [Hour]
-        } else {
-            return [Hour]()
-        }
-    }
-
 }

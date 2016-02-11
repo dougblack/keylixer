@@ -39,17 +39,6 @@ class Keylixer: NSObject, NSApplicationDelegate {
     }
     
     /**
-        Receiving global key down events requires getting permission through the
-        Accessibility preferences.
-    */
-    func acquirePrivileges() {
-        if AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true]) == false {
-            print("Accessibility access refused.")
-            exit(1)
-        }
-    }
-    
-    /**
         This is the function that actually attaches the keydown event listener.
         It uses the relatively new Notifications API, which allows us to grab a read-only
         stream of events.
@@ -80,6 +69,17 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
     func quit(sender: NSMenuItem) {
         NSApplication.sharedApplication().terminate(self)
+    }
+
+    /**
+     Receiving global key down events requires getting permission through the
+     Accessibility preferences.
+     */
+    func acquirePrivileges() {
+        if AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true]) == false {
+            print("Accessibility access refused.")
+            exit(1)
+        }
     }
 }
 

@@ -68,12 +68,12 @@ class Keylixer: NSObject, NSApplicationDelegate {
         menu.addItem(NSMenuItem(title: "Preferences", action: Selector("openPreferences:"), keyEquivalent: "P"))
         return menu
     }
-    
     /**
         This is the function that actually updates the active key count on the status item.
     */
     func updateDisplayCount(count : Int) {
         self.displayCount = count
+        print(self.displayCount)
     }
 }
 

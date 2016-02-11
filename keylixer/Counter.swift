@@ -15,9 +15,7 @@ class Counter : NSObject {
         - The total counts broken down by each key code.
     */
 
-    var dates = [NSTimeInterval]();
-    var counts = [Int]();
-    var keys = [UInt16: Int]();
+    var hours = [Hour]();
     var updateDisplayCount : (Int) -> ();
     
     /**
@@ -28,29 +26,33 @@ class Counter : NSObject {
         self.updateDisplayCount = updateDisplayCount
     }
     
-    /**
-        Do the actual counting. Here we ask for a key code and manipulate that
-        into our two datastructures.
-    */
+    func updateHours() {
+        
+    }
+    
+     /**
+     Do the actual counting. Here we ask for a key code and manipulate that
+     into our three datastructures.
+    
+     */
     func count(key: UInt16) {
-        
-        // Update key stats.
-        self.keys[key] = self.keys[key, or: 0] + 1
-        
-        // Update time total.
-        let timestamp = NSDate().timeIntervalSince1970
-        let lastHour = timestamp - fmod(timestamp, 3600)
 
-        if self.dates.last == lastHour {
-            self.counts[self.counts.endIndex-1] = self.counts.last! + 1
-        } else {
-            self.dates.append(lastHour)
-            self.counts.append(1)
+        let now = Hour()
+        let last = self.hours.last
+        
+        if last == nil {
+            self.hours.append(Hour())
         }
         
-        // Update display.
-        if let newHourCount = self.counts.last {
-            self.updateDisplayCount(newHourCount)
+        if self.hours.last! != now {
+            self.hours += now.hoursSince(self.hours.last!)
+            self.hours.append(now)
+        }
+        
+        self.hours.last!.inc()
+        
+        if let hour = self.hours.last {
+            self.updateDisplayCount(hour.count)
         }
     }
 }

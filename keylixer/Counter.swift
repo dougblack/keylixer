@@ -15,8 +15,11 @@ class Counter : NSObject {
         - The total counts broken down by each key code.
     */
 
-    var hours = [Hour]();
-    var updateDisplayCount : (Int) -> ();
+    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("keylixer")
+
+    var hours : [Hour]
+    var updateDisplayCount : (Int) -> ()
     
     /**
         This init() function just asks for a function handle it
@@ -24,35 +27,44 @@ class Counter : NSObject {
     */
     init(updateDisplayCount: (Int) -> ()) {
         self.updateDisplayCount = updateDisplayCount
+        self.hours = Counter.loadHours()
     }
     
-    func updateHours() {
-        
-    }
+    /**
+        Do the actual counting.
     
-     /**
-     Do the actual counting. Here we ask for a key code and manipulate that
-     into our three datastructures.
-    
-     */
+    */
     func count(key: UInt16) {
 
         let now = Hour()
-        let last = self.hours.last
         
-        if last == nil {
-            self.hours.append(Hour())
+        if hours.last == nil {
+            hours.append(Hour())
         }
         
-        if self.hours.last! != now {
-            self.hours += now.hoursSince(self.hours.last!)
-            self.hours.append(now)
+        if hours.last! != now {
+            hours += now.hoursSince(hours.last!)
+            hours.append(now)
         }
         
-        self.hours.last!.inc()
+        hours.last!.inc()
         
-        if let hour = self.hours.last {
-            self.updateDisplayCount(hour.count)
+        if let hour = hours.last {
+            updateDisplayCount(hour.count)
         }
     }
+
+    func archive() {
+        NSKeyedArchiver.archiveRootObject(self.hours, toFile: Counter.ArchiveURL.path!)
+    }
+
+    class func loadHours() -> [Hour] {
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(Counter.ArchiveURL.path!) {
+            return NSKeyedUnarchiver.unarchiveObjectWithFile(Counter.ArchiveURL.path!) as! [Hour]
+        } else {
+            return [Hour]()
+        }
+    }
+
 }

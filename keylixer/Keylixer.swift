@@ -16,16 +16,17 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
     var counter : Counter?
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
-    var displayCount: Int?
 
     /**
         Keylixer is just loading. Ensure we have permission to listen to key
         down events, build the status menu, and start listening.
     */
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+
         self.counter = Counter(updateDisplayCount: self.updateDisplayCount)
+
         self.statusItem.menu = self.buildMenu()
-        self.statusItem.title = "--- keys"
+        self.statusItem.button!.title = "Keys"
         self.acquirePrivileges()
         self.attachKeyListener()
     }
@@ -34,7 +35,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
         Keylixer is trying to quit. Save the data!
     */
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+        self.counter!.archive()
     }
     
     /**
@@ -65,15 +66,20 @@ class Keylixer: NSObject, NSApplicationDelegate {
     func buildMenu() -> NSMenu {
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Stats", action: Selector("openStats:"), keyEquivalent: "S"))
-        menu.addItem(NSMenuItem(title: "Preferences", action: Selector("openPreferences:"), keyEquivalent: "P"))
+        menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit:"), keyEquivalent: "Q"))
         return menu
     }
+
     /**
         This is the function that actually updates the active key count on the status item.
     */
     func updateDisplayCount(count : Int) {
-        self.displayCount = count
-        print(self.displayCount)
+        self.statusItem.button!.title = "\(count) keys"
+        print(count)
+    }
+
+    func quit(sender: NSMenuItem) {
+        NSApplication.sharedApplication().terminate(self)
     }
 }
 

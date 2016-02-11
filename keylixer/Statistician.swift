@@ -18,7 +18,7 @@ class Statistician {
 
     func stats() -> [String: Int] {
 
-        var stats : [String: Int] = ["year": 0, "month": 0, "week": 0, "day": 0, "total": 0]
+        var stats : [String: Int]! = ["year": 0, "month": 0, "week": 0, "day": 0, "total": 0]
         let calendar = NSCalendar.currentCalendar()
         let currentComponents = calendar.components(NSCalendarUnit(), fromDate: NSDate())
 

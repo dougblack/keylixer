@@ -16,6 +16,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
     var counter : Counter?
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+    let statsPopover = NSPopover()
 
     /**
         Keylixer is just loading. Ensure we have permission to listen to key
@@ -30,6 +31,10 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
         self.acquirePrivileges()
         self.attachKeyListener()
+
+        let statsViewController = StatsViewController(nibName: "StatsViewController", bundle: nil)
+        statsViewController!.counter = self.counter
+        statsPopover.contentViewController = statsViewController
     }
 
     /**
@@ -72,9 +77,9 @@ class Keylixer: NSObject, NSApplicationDelegate {
     }
 
     func stats(sender: NSMenuItem) {
-        let statistician = Statistician(counter: self.counter!)
-        let stats = statistician.stats()
-        print(stats)
+        if let button = statusItem.button {
+            statsPopover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: NSRectEdge.MinY)
+        }
     }
 
     /**

@@ -36,7 +36,6 @@ class Counter : NSObject {
     
     /**
         Do the actual counting.
-    
     */
     func count(key: UInt16) {
 

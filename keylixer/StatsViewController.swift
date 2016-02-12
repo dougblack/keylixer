@@ -16,12 +16,34 @@ class StatsViewController: NSViewController {
     @IBOutlet weak var monthLabel: NSTextField!
     @IBOutlet weak var yearLabel: NSTextField!
     @IBOutlet weak var totalLabel: NSTextField!
-    var counter: Counter?
+    var counter : Counter!
+
+
+    init?(counter: Counter) {
+        self.counter = counter
+        super.init(nibName: "StatsViewController", bundle: nil)
+    }
+
+    required init?(coder decoder: NSCoder) {
+        super.init(coder: decoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let stats = Statistician(counter: self.counter!).stats()
-        hourLabel.stringValue = String(self.counter!.hours.last!.count)
+        hourLabel.stringValue = "0"
+        dayLabel.stringValue = "0"
+        weekLabel.stringValue = "0"
+        monthLabel.stringValue = "0"
+        yearLabel.stringValue = "0"
+        totalLabel.stringValue = "0"
+    }
+
+    override func viewDidAppear() {
+        let stats = Statistician(counter: counter).stats()
+        let hours = counter.hours
+        let last = hours.last!
+        let count = last.count
+        hourLabel.stringValue = String(count)
         dayLabel.stringValue = String(stats["day"]!)
         weekLabel.stringValue = String(stats["week"]!)
         monthLabel.stringValue = String(stats["month"]!)

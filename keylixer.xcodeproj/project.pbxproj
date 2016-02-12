@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B178A7E1C6D567300FFD162 /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B178A7D1C6D567300FFD162 /* EventHandler.swift */; };
 		3B7FCA3D1C6C4F5D002E6222 /* Archiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FCA3C1C6C4F5D002E6222 /* Archiver.swift */; };
 		3B7FCA3F1C6C567D002E6222 /* Statistician.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FCA3E1C6C567D002E6222 /* Statistician.swift */; };
 		3B7FCA421C6C61CD002E6222 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FCA401C6C61CD002E6222 /* StatsViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B178A7D1C6D567300FFD162 /* EventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
 		3B7FCA3C1C6C4F5D002E6222 /* Archiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archiver.swift; sourceTree = "<group>"; };
 		3B7FCA3E1C6C567D002E6222 /* Statistician.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statistician.swift; sourceTree = "<group>"; };
 		3B7FCA401C6C61CD002E6222 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
@@ -62,13 +64,14 @@
 		3BD9732B1C69AFBF008E1BFD /* keylixer */ = {
 			isa = PBXGroup;
 			children = (
-				3B7FCA401C6C61CD002E6222 /* StatsViewController.swift */,
-				3B7FCA411C6C61CD002E6222 /* StatsViewController.xib */,
 				3BD9732C1C69AFBF008E1BFD /* Keylixer.swift */,
-				3B7FCA3C1C6C4F5D002E6222 /* Archiver.swift */,
+				3B178A7D1C6D567300FFD162 /* EventHandler.swift */,
 				3BD9733B1C69BB58008E1BFD /* Counter.swift */,
 				3BC7064F1C6B9DFB0045D3DD /* Hour.swift */,
+				3B7FCA3C1C6C4F5D002E6222 /* Archiver.swift */,
 				3B7FCA3E1C6C567D002E6222 /* Statistician.swift */,
+				3B7FCA401C6C61CD002E6222 /* StatsViewController.swift */,
+				3B7FCA411C6C61CD002E6222 /* StatsViewController.xib */,
 				3BD973301C69AFBF008E1BFD /* Assets.xcassets */,
 				3BD973321C69AFBF008E1BFD /* Main.storyboard */,
 				3BD973351C69AFBF008E1BFD /* Info.plist */,
@@ -149,6 +152,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BC706501C6B9DFB0045D3DD /* Hour.swift in Sources */,
+				3B178A7E1C6D567300FFD162 /* EventHandler.swift in Sources */,
 				3B7FCA3D1C6C4F5D002E6222 /* Archiver.swift in Sources */,
 				3B7FCA3F1C6C567D002E6222 /* Statistician.swift in Sources */,
 				3BD9733C1C69BB58008E1BFD /* Counter.swift in Sources */,

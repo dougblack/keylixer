@@ -8,61 +8,44 @@
 
 import Cocoa
 
+
 @NSApplicationMain
 class Keylixer: NSObject, NSApplicationDelegate {
-    /**
-        This is the start point for Keylixer.
-    */
 
-    var counter : Counter?
+    var counter : Counter! = Counter()
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
+    var statsViewController : StatsViewController!
     let statsPopover = NSPopover()
 
-    /**
-        Keylixer is just loading. Ensure we have permission to listen to key
-        down events, build the status menu, and start listening.
-    */
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        buildStatusItem()
+        buildStatsPopover()
+        registerKeyListener()
+    }
 
-        self.counter = Counter()
 
-        self.statusItem.menu = self.buildMenu()
-        self.statusItem.button!.title = "Keys"
+    func applicationWillTerminate(aNotification: NSNotification) {
+        self.counter.archive()
+    }
 
-        self.acquirePrivileges()
-        self.attachKeyListener()
+    func registerKeyListener() {
+        EventHandler.getPermission()
+        EventHandler.registerKeyEvent({(event: NSEvent) in self.counter.count(event)})
+    }
 
-        let statsViewController = StatsViewController(nibName: "StatsViewController", bundle: nil)
-        statsViewController!.counter = self.counter
+    // MARK: UI Logic
+
+    func buildStatsPopover() {
+        self.statsViewController = StatsViewController(counter: self.counter)
         statsPopover.contentViewController = statsViewController
     }
 
-    /**
-        Keylixer is trying to quit. Save the data!
-    */
-    func applicationWillTerminate(aNotification: NSNotification) {
-        self.counter!.archive()
-    }
-    
-    /**
-        This is the function that actually attaches the keydown event listener.
-        It uses the relatively new Notifications API, which allows us to grab a read-only
-        stream of events.
-    */
-    func attachKeyListener() {
-        NSEvent.addGlobalMonitorForEventsMatchingMask(NSEventMask.KeyDownMask, handler: {
-            (event: NSEvent) in self.counter?.count(event.keyCode)
-        })
-    }
-    
-    /**
-        Build the menu. This provides stats and preferences options.
-    */
-    func buildMenu() -> NSMenu {
+    func buildStatusItem() {
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Stats", action: Selector("stats:"), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit:"), keyEquivalent: ""))
-        return menu
+        statusItem.menu = menu
+        statusItem.button!.title = "⌨️"
     }
 
     func quit(sender: NSMenuItem) {
@@ -72,24 +55,8 @@ class Keylixer: NSObject, NSApplicationDelegate {
     func stats(sender: NSMenuItem) {
         if let button = statusItem.button {
             statsPopover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: NSRectEdge.MinY)
-            NSEvent.addGlobalMonitorForEventsMatchingMask([NSEventMask.LeftMouseDownMask, NSEventMask.RightMouseDownMask], handler: {
-                (event: NSEvent) in
-                if self.statsPopover.shown {
-                    self.statsPopover.performClose(event)
-                }
-            })
+            EventHandler.registerMouseEvent({ (event: NSEvent) in if self.statsPopover.shown { self.statsPopover.performClose(event) } })
         }
     }
 
-    /**
-     Receiving global key down events requires getting permission through the
-     Accessibility preferences.
-     */
-    func acquirePrivileges() {
-        if AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true]) == false {
-            print("Accessibility access refused.")
-            exit(1)
-        }
-    }
 }
-

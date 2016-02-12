@@ -32,8 +32,8 @@ class Hour : NSObject, NSCoding {
         return Int(timestamp - start.timestamp)
     }
     
-    func hoursSince(start: Hour) -> [Hour] {
-        let hourRange = 1...(since(start) / 3600)
+    func andHoursSince(start: Hour) -> [Hour] {
+        let hourRange = 1...((since(start) / 3600) + 1)
         return hourRange.map(Hour.init)
     }
     

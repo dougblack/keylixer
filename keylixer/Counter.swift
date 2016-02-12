@@ -6,35 +6,19 @@
 //  Copyright © 2016 Doug Black. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 class Counter : NSObject {
-    /**
-        A Counter stores counts. It stores two types of counts.
-        - The total keystrokes per hour in a dictionary with one key/value pair per hour.
-        - The total counts broken down by each key code.
-    */
-
 
     var hours : [Hour]
     
-    /**
-        This init() function just asks for a function handle it
-        can shoot count updated events at. It tries loading the hours
-        in the background.
-    */
-
     override init() {
-        if let hours = Archiver.unarchiveHours() {
-            self.hours = hours
-        } else {
-            self.hours = [Hour]()
-        }
+        self.hours = [Hour()]
+        super.init()
+        self.unarchive()
     }
-    /**
-        Do the actual counting.
-    */
-    func count(key: UInt16) {
+
+    func count(event: NSEvent) {
 
         let now = Hour()
         
@@ -43,12 +27,21 @@ class Counter : NSObject {
         }
 
         if hours.last! != now {
-            hours += now.hoursSince(hours.last!)
-            hours.append(now)
+            hours += now.andHoursSince(hours.last!)
         }
         
         hours.last!.inc()
 
+    }
+
+    func unarchive() {
+        if var hours = Archiver.unarchiveHours() {
+            self.hours = hours
+            let now = Hour()
+            if hours.last! != now {
+                hours += now.andHoursSince(hours.last!)
+            }
+        }
     }
 
     func archive() {

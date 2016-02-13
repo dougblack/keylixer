@@ -28,10 +28,10 @@ class Statistician {
         let calendar = NSCalendar.currentCalendar()
         let currentComponents = calendar.components(NSCalendarUnit(), fromDate: NSDate())
 
-        print(self.counter.hours.count)
         for hour in self.counter.hours {
             let date = NSDate(timeIntervalSince1970: hour.timestamp)
             let dateComponents = calendar.components(NSCalendarUnit(), fromDate: date)
+
             stats["total"]! += hour.count
             if dateComponents.year == currentComponents.year {
                 stats["year"]! += hour.count
@@ -45,6 +45,7 @@ class Statistician {
                     }
                 }
             }
+
         }
         return stats
     }

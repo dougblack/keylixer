@@ -8,7 +8,6 @@
 
 import Cocoa
 
-
 @NSApplicationMain
 class Keylixer: NSObject, NSApplicationDelegate {
 
@@ -49,7 +48,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
 
     func buildStatusItem() {
         let menu = NSMenu()
-        menu.addItem(NSMenuItem(title: "Stats", action: Selector("stats:"), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Stats", action: Selector("showStats:"), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Quit", action: Selector("quit:"), keyEquivalent: ""))
         statusItem.menu = menu
         statusItem.button!.title = "⌨️"
@@ -59,7 +58,7 @@ class Keylixer: NSObject, NSApplicationDelegate {
         NSApplication.sharedApplication().terminate(self)
     }
 
-    func stats(sender: NSMenuItem) {
+    func showStats(sender: NSMenuItem) {
         if let button = statusItem.button {
             statsPopover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: NSRectEdge.MinY)
         }

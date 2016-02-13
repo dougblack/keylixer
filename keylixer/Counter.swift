@@ -20,7 +20,13 @@ class Counter : NSObject {
     func count(event: NSEvent) {
         catchUp()
         hours.last!.inc()
+    }
 
+    func catchUp() {
+        let now = Hour()
+        if hours.last! != now {
+            hours += hours.last!...now
+        }
     }
 
     // MARK: Archival
@@ -29,13 +35,6 @@ class Counter : NSObject {
         if let hours = Archiver.unarchiveHours() {
             self.hours = hours
             catchUp()
-        }
-    }
-
-    func catchUp() {
-        let now = Hour()
-        if hours.last! != now {
-            hours += hours.last!...now
         }
     }
 

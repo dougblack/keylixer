@@ -26,6 +26,8 @@ class EventHandler : NSObject {
     }
 
     class func getPermission() -> Bool {
-        return AXIsProcessTrustedWithOptions([kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true]) == false
+        return AXIsProcessTrustedWithOptions(
+            [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true]
+        )
     }
 }

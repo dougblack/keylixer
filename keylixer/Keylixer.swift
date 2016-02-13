@@ -23,7 +23,6 @@ class Keylixer: NSObject, NSApplicationDelegate {
         registerKeyListener()
     }
 
-
     func applicationWillTerminate(aNotification: NSNotification) {
         self.counter.archive()
     }
@@ -38,6 +37,14 @@ class Keylixer: NSObject, NSApplicationDelegate {
     func buildStatsPopover() {
         self.statsViewController = StatsViewController(counter: self.counter)
         statsPopover.contentViewController = statsViewController
+
+        EventHandler.registerMouseEvent({
+            (event: NSEvent) in
+            if self.statsPopover.shown {
+                self.statsPopover.performClose(event)
+            }
+        })
+
     }
 
     func buildStatusItem() {
@@ -55,7 +62,6 @@ class Keylixer: NSObject, NSApplicationDelegate {
     func stats(sender: NSMenuItem) {
         if let button = statusItem.button {
             statsPopover.showRelativeToRect(button.bounds, ofView: button, preferredEdge: NSRectEdge.MinY)
-            EventHandler.registerMouseEvent({ (event: NSEvent) in if self.statsPopover.shown { self.statsPopover.performClose(event) } })
         }
     }
 

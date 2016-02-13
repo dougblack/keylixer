@@ -28,17 +28,8 @@ class StatsViewController: NSViewController {
         super.init(coder: decoder)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        hourLabel.stringValue = "0"
-        dayLabel.stringValue = "0"
-        weekLabel.stringValue = "0"
-        monthLabel.stringValue = "0"
-        yearLabel.stringValue = "0"
-        totalLabel.stringValue = "0"
-    }
-
     override func viewDidAppear() {
+        super.viewDidAppear()
         let stats = Statistician(counter: counter).stats()
         let hours = counter.hours
         let last = hours.last!

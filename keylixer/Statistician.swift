@@ -18,10 +18,17 @@ class Statistician {
 
     func stats() -> [String: Int] {
 
-        var stats : [String: Int]! = ["year": 0, "month": 0, "week": 0, "day": 0, "total": 0]
+        var stats : [String: Int]! = [
+            "year": 0,
+            "month": 0,
+            "week": 0,
+            "day": 0,
+            "total": 0
+        ]
         let calendar = NSCalendar.currentCalendar()
         let currentComponents = calendar.components(NSCalendarUnit(), fromDate: NSDate())
 
+        print(self.counter.hours.count)
         for hour in self.counter.hours {
             let date = NSDate(timeIntervalSince1970: hour.timestamp)
             let dateComponents = calendar.components(NSCalendarUnit(), fromDate: date)

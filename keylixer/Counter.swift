@@ -10,37 +10,32 @@ import Cocoa
 
 class Counter : NSObject {
 
-    var hours : [Hour]
+    var hours = [Hour()]
     
     override init() {
-        self.hours = [Hour()]
         super.init()
         self.unarchive()
     }
 
     func count(event: NSEvent) {
-
-        let now = Hour()
-        
-        if hours.isEmpty {
-            hours.append(now)
-        }
-
-        if hours.last! != now {
-            hours += now.andHoursSince(hours.last!)
-        }
-        
+        catchUp()
         hours.last!.inc()
 
     }
 
+    // MARK: Archival
+
     func unarchive() {
-        if var hours = Archiver.unarchiveHours() {
+        if let hours = Archiver.unarchiveHours() {
             self.hours = hours
-            let now = Hour()
-            if hours.last! != now {
-                hours += now.andHoursSince(hours.last!)
-            }
+            catchUp()
+        }
+    }
+
+    func catchUp() {
+        let now = Hour()
+        if hours.last! != now {
+            hours += hours.last!...now
         }
     }
 

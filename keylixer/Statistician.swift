@@ -18,30 +18,29 @@ class Statistician {
 
     func stats() -> [String: Int] {
 
-        var stats : [String: Int]! = [
-            "year": 0,
-            "month": 0,
+        var stats = [
             "week": 0,
-            "day": 0,
+            "yesterday": 0,
+            "today": 0,
             "total": 0
         ]
         let calendar = NSCalendar.currentCalendar()
-        let currentComponents = calendar.components(NSCalendarUnit(), fromDate: NSDate())
+        let today = calendar.components([.Year, .Month, .WeekOfMonth, .Day], fromDate: NSDate())
+        let yesterdayDate = calendar.dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: [])!
+        let yesterday = calendar.components([.Year, .Month, .WeekOfMonth, .Day], fromDate: yesterdayDate)
 
         for hour in self.counter.hours {
-            let date = NSDate(timeIntervalSince1970: hour.timestamp)
-            let dateComponents = calendar.components(NSCalendarUnit(), fromDate: date)
-
+            let hourDate = hour.date()
             stats["total"]! += hour.count
-            if dateComponents.year == currentComponents.year {
-                stats["year"]! += hour.count
-                if currentComponents.month == dateComponents.month {
-                    stats["month"]! += hour.count
-                    if currentComponents.weekOfMonth == dateComponents.weekOfMonth {
+            if hourDate.year == today.year {
+                if hourDate.month == today.month {
+                    if hourDate.weekOfMonth == today.weekOfMonth {
                         stats["week"]! += hour.count
-                        if currentComponents.day == dateComponents.day {
-                            stats["day"]! += hour.count
-                        }
+                    }
+                    if hourDate.day == yesterday.day {
+                        stats["yesterday"]! += hour.count
+                    } else if hourDate.day == today.day {
+                        stats["today"]! += hour.count
                     }
                 }
             }

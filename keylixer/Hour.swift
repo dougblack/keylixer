@@ -45,6 +45,13 @@ class Hour : NSObject, NSCoding {
         self.count = Int(decoder.decodeIntegerForKey("count"))
         self.timestamp = NSTimeInterval(decoder.decodeDoubleForKey("timestamp"))
     }
+
+    func date() -> NSDateComponents {
+        let date = NSDate(timeIntervalSince1970: timestamp)
+        return NSCalendar.currentCalendar().components([.Year, .Month, .WeekOfMonth, .Day], fromDate: date)
+
+
+    }
 }
 
 // MARK: Comparisons

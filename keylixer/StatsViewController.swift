@@ -10,14 +10,12 @@ import Cocoa
 
 class StatsViewController: NSViewController {
 
-    @IBOutlet weak var hourLabel: NSTextField!
     @IBOutlet weak var dayLabel: NSTextField!
+    @IBOutlet weak var yesterdayLabel: NSTextField!
     @IBOutlet weak var weekLabel: NSTextField!
-    @IBOutlet weak var monthLabel: NSTextField!
-    @IBOutlet weak var yearLabel: NSTextField!
     @IBOutlet weak var totalLabel: NSTextField!
-    var counter : Counter!
 
+    var counter : Counter!
 
     init?(counter: Counter) {
         self.counter = counter
@@ -31,14 +29,9 @@ class StatsViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         let stats = Statistician(counter: counter).stats()
-        let hours = counter.hours
-        let last = hours.last!
-        let count = last.count
-        hourLabel.stringValue = String(count)
-        dayLabel.stringValue = String(stats["day"]!)
+        dayLabel.stringValue = String(stats["today"]!)
+        yesterdayLabel.stringValue = String(stats["yesterday"]!)
         weekLabel.stringValue = String(stats["week"]!)
-        monthLabel.stringValue = String(stats["month"]!)
-        yearLabel.stringValue = String(stats["year"]!)
         totalLabel.stringValue = String(stats["total"]!)
     }
 }

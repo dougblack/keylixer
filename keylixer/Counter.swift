@@ -29,7 +29,7 @@ class Counter : NSObject {
         }
     }
 
-    // MARK: Archival
+    // MARK: Persistence
 
     func unarchive() {
         if let hours = Archiver.unarchiveHours() {

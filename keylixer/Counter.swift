@@ -20,12 +20,16 @@ class Counter : NSObject {
     func count(event: NSEvent) {
         catchUp()
         hours.last!.inc()
+        if hours.last!.count % 1000 == 0 {
+            archive()
+        }
     }
 
     func catchUp() {
         let now = Hour()
         if hours.last! != now {
             hours += hours.last!...now
+            archive()
         }
     }
 
@@ -39,6 +43,6 @@ class Counter : NSObject {
     }
 
     func archive() {
-        Archiver.archiveHours(self.hours)
+        Archiver.archiveHours(hours)
     }
 }

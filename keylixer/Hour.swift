@@ -65,7 +65,7 @@ func !=(lhs: Hour, rhs: Hour) -> Bool {
 }
 
 func ...(start: Hour, end: Hour) -> [Hour] {
-    // Return Array of Hours since start including self
+    // Return Array of Hour's since start including self
     let hourDiff = Int(end.timestamp - start.timestamp) / 3600
     let hourRange = 0...hourDiff
     return hourRange.map{hour in

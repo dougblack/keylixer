@@ -23,10 +23,6 @@ class Hour : NSObject, NSCoding {
         self.count = 0
     }
 
-    func inc() {
-        self.count++
-    }
-
     // MARK: Time Helper
 
     class func now() -> NSTimeInterval {
@@ -72,4 +68,8 @@ func ...(start: Hour, end: Hour) -> [Hour] {
         let hourTimestamp = start.timestamp + NSTimeInterval(hour * 3600)
         return Hour(timestamp: hourTimestamp)
     }
+}
+
+postfix func ++(hour: Hour) {
+    hour.count++
 }

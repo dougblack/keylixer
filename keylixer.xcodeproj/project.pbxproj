@@ -12,6 +12,7 @@
 		3B7FCA3F1C6C567D002E6222 /* Statistician.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FCA3E1C6C567D002E6222 /* Statistician.swift */; };
 		3B7FCA421C6C61CD002E6222 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7FCA401C6C61CD002E6222 /* StatsViewController.swift */; };
 		3B7FCA431C6C61CD002E6222 /* StatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FCA411C6C61CD002E6222 /* StatsViewController.xib */; };
+		3BC2A2B91C724EB500B47F21 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3BC2A2B81C724EB500B47F21 /* icon.icns */; };
 		3BC706501C6B9DFB0045D3DD /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC7064F1C6B9DFB0045D3DD /* Hour.swift */; };
 		3BD9732D1C69AFBF008E1BFD /* Keylixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD9732C1C69AFBF008E1BFD /* Keylixer.swift */; };
 		3BD973311C69AFBF008E1BFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BD973301C69AFBF008E1BFD /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 		3B7FCA3E1C6C567D002E6222 /* Statistician.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statistician.swift; sourceTree = "<group>"; };
 		3B7FCA401C6C61CD002E6222 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		3B7FCA411C6C61CD002E6222 /* StatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatsViewController.xib; sourceTree = "<group>"; };
+		3BC2A2B81C724EB500B47F21 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		3BC7064F1C6B9DFB0045D3DD /* Hour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hour.swift; sourceTree = "<group>"; };
 		3BD973291C69AFBF008E1BFD /* keylixer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = keylixer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD9732C1C69AFBF008E1BFD /* Keylixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keylixer.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BC2A2B71C724EA100B47F21 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3BC2A2B81C724EB500B47F21 /* icon.icns */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		3BD973201C69AFBE008E1BFD = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 		3BD9732B1C69AFBF008E1BFD /* keylixer */ = {
 			isa = PBXGroup;
 			children = (
+				3BC2A2B71C724EA100B47F21 /* Assets */,
 				3BD9732C1C69AFBF008E1BFD /* Keylixer.swift */,
 				3B178A7D1C6D567300FFD162 /* EventHandler.swift */,
 				3BD9733B1C69BB58008E1BFD /* Counter.swift */,
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BD973311C69AFBF008E1BFD /* Assets.xcassets in Resources */,
+				3BC2A2B91C724EB500B47F21 /* icon.icns in Resources */,
 				3B7FCA431C6C61CD002E6222 /* StatsViewController.xib in Resources */,
 				3BD973341C69AFBF008E1BFD /* Main.storyboard in Resources */,
 			);

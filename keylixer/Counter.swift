@@ -19,7 +19,7 @@ class Counter : NSObject {
 
     func count(event: NSEvent) {
         catchUp()
-        hours.last!.inc()
+        hours.last!++
         if hours.last!.count % 1000 == 0 {
             archive()
         }

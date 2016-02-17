@@ -60,16 +60,6 @@ func !=(lhs: Hour, rhs: Hour) -> Bool {
     return !(lhs == rhs)
 }
 
-func ...(start: Hour, end: Hour) -> [Hour] {
-    // Return Array of Hour's since start including self
-    let hourDiff = Int(end.timestamp - start.timestamp) / 3600
-    let hourRange = 0...hourDiff
-    return hourRange.map{hour in
-        let hourTimestamp = start.timestamp + NSTimeInterval(hour * 3600)
-        return Hour(timestamp: hourTimestamp)
-    }
-}
-
 postfix func ++(hour: Hour) {
     hour.count++
 }

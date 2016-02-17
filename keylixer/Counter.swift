@@ -28,7 +28,7 @@ class Counter : NSObject {
     func catchUp() {
         let now = Hour()
         if hours.last! != now {
-            hours += hours.last!...now
+            hours.append(now)
             archive()
         }
     }

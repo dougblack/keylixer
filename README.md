@@ -11,3 +11,7 @@ stats later.
 ### Screenshot
 
 <img src="./media/screen1.png" width="300x"/>
+
+### Contributing
+
+Just open a PR or file an issue.
